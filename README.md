@@ -102,8 +102,7 @@ ng test
 ng e2e
 ```
 
-Das war's auch schon!
-
+Fertig!
 
 
 ## Probleme?
