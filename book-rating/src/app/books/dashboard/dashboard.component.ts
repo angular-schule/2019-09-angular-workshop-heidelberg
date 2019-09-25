@@ -43,7 +43,11 @@ export class DashboardComponent implements OnInit {
   }
 
   doRateUp(book: Book) {
-    const ratedBook = this.rs.rateUp(book);
+    // const ratedBook = this.rs.rateUp(book);
+    const ratedBook = {
+      ... book,
+      rating: book.rating + 1
+    };
     this.updateAndSort(ratedBook);
   }
 
