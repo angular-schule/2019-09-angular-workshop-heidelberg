@@ -1,16 +1,7 @@
 <br-book
   *ngFor="let b of books"
   [book]="b"
+  (rateUp)="doRateUp($event)"
+  (rateDown)="doRateDown($event)"
 >
 </br-book>
-
-
-
-<!-- <ng-container *ngIf="books.length">
-  <div
-    *ngFor="let b of books; even as e"
-    [ngClass]="{ blauerHintergrund: e }"
-  >
-    <br-book [book]="b"></br-book>
-  </div>
-</ng-container> -->
