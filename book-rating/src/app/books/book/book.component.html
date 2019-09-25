@@ -10,7 +10,13 @@
     </div>
     <p>{{ book.description }}</p>
 
-    <button class="btn btn-primary"
-      (click)="book.rating = book.rating - 1">Miau!</button>
+    <button
+      (click)="doRateDown()"
+      class="btn btn-secondary"> - </button>
+
+    <button
+      (click)="doRateUp()"
+      class="btn btn-primary"> + </button>
+
   </div>
 </div>
