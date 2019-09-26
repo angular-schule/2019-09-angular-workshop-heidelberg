@@ -5,8 +5,16 @@
     <input formControlName="isbn" type="text" class="form-control" id="isbn">
 
     <div class="feedback-red" *ngIf="isInvalid('isbn')">
-      Please enter a valid ISBN
+      Error:
     </div>
+
+    <div class="feedback-red" *ngIf="hasError('isbn', 'required')">
+      Please enter a ISBN
+    </div>
+
+    <div class="feedback-red" *ngIf="hasError('isbn', 'minlength')">
+        Please enter at least three characters
+      </div>
   </div>
 
   <div class="form-group">

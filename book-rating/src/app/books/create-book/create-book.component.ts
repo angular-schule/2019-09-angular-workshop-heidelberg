@@ -28,7 +28,10 @@ export class CreateBookComponent {
     return control.dirty && control.invalid;
   }
 
-  // für die Pros!
-  // hasError(name: string, errorCode: string)
+  hasError(name: string, errorCode: string) {
+    const control = this.bookForm.get(name);
+    return control.hasError(errorCode) && control.dirty;
+
+  }
 
 }
