@@ -23,4 +23,12 @@ export class CreateBookComponent {
     );
   }
 
+  isInvalid(name: string) {
+    const control = this.bookForm.get(name);
+    return control.dirty && control.invalid;
+  }
+
+  // für die Pros!
+  // hasError(name: string, errorCode: string)
+
 }

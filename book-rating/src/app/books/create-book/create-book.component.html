@@ -4,7 +4,7 @@
     <label for="isbn">ISBN</label>
     <input formControlName="isbn" type="text" class="form-control" id="isbn">
 
-    <div class="feedback-red" *ngIf="false">
+    <div class="feedback-red" *ngIf="isInvalid('isbn')">
       Please enter a valid ISBN
     </div>
   </div>
