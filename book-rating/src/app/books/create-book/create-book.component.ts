@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'br-create-book',
@@ -8,6 +9,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateBookComponent {
+
+  @Output()
+  createBook = new EventEmitter<Book>();
 
   bookForm = new FormGroup({
     isbn: new FormControl('', [
@@ -41,12 +45,7 @@ export class CreateBookComponent {
       rating: 1
     };
 
-    // Hands On:
-    // 1. erstelle den EventEmitter "createBook"
-    // 2. sende das neue Book
-    // 3. subscribe auf das Buch
-    // 4. füge das Buch dem Buch-Array hinzu
-
+    this.createBook.emit(newBook);
     this.bookForm.reset();
   }
 }
