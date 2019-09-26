@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'br-create-book',
   templateUrl: './create-book.component.html',
-  styleUrls: ['./create-book.component.scss']
+  styleUrls: ['./create-book.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateBookComponent {
 
@@ -34,4 +35,18 @@ export class CreateBookComponent {
 
   }
 
+  submitForm() {
+    const newBook = {
+      ...this.bookForm.value,
+      rating: 1
+    };
+
+    // Hands On:
+    // 1. erstelle den EventEmitter "createBook"
+    // 2. sende das neue Book
+    // 3. subscribe auf das Buch
+    // 4. füge das Buch dem Buch-Array hinzu
+
+    this.bookForm.reset();
+  }
 }
