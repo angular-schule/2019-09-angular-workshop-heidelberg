@@ -36,18 +36,15 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       complete: () => console.log('COMPLETE')
     };
 
-    const observable = new Observable(subscriber => {
-      subscriber.next('😀');
-      subscriber.next('😍');
-      subscriber.next('😆');
-
-      setTimeout(() => subscriber.next('😎'), 1000);
-      setTimeout(() => subscriber.next('🤓'), 2000);
-
-      setTimeout(() => subscriber.error('😡'), 1000);
-
-
-    });
+    const observable = from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+      .pipe(
+        map(z => z * 10)
+        // 1. filtere, nur Zahlen größer als 20 sollen weiter "fließen"
+        // 2. addiere 5
+        // 3. bilde die summe aus allen Zahlen --> X
+        // für die Pros:
+        // 4. gib X mal einen Stern aus
+      );
 
     this.subscription = observable
         .subscribe(observer);
