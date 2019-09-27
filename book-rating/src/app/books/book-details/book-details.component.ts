@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, filter, scan, reduce } from 'rxjs/operators';
 import { of, from, timer, interval, Subscription, Observable } from 'rxjs';
 
 @Component({
@@ -38,12 +38,11 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
     const observable = from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
       .pipe(
-        map(z => z * 10)
-        // 1. filtere, nur Zahlen größer als 20 sollen weiter "fließen"
-        // 2. addiere 5
-        // 3. bilde die summe aus allen Zahlen --> X
-        // für die Pros:
-        // 4. gib X mal einen Stern aus
+        map(z => z * 10),
+        filter(z => z > 20),
+        map(z => z + 5),
+        reduce((a, b) => a + b),
+        map(summe => '⭐️'.repeat(summe))
       );
 
     this.subscription = observable
