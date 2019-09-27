@@ -36,13 +36,13 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       complete: () => console.log('COMPLETE')
     };
 
-    this.subscription = // of('😀', '😎', '😇', '😱')
-        interval(100)
+    this.subscription = of('😀', '😎', '😇', '😱')
         .subscribe(observer);
   }
 
+  // beste Alternative: async pipe
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }
