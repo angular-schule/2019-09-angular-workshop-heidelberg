@@ -13,25 +13,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class BookDetailsComponent implements OnInit {
 
-  book: Book;
-  subscription: Subscription;
+  book$: Observable<Book>;
 
   constructor(private route: ActivatedRoute, private bs: BookStoreService) { }
 
   ngOnInit() {
 
-    this.route.paramMap
+    this.book$ = this.route.paramMap
       .pipe(
         map(paramMap => paramMap.get('isbn')),
-        switchMap(isbn => this.bs.getSingle(isbn)),
-        catchError((e: HttpErrorResponse) => of({
-          title: 'Error loading ' + e.url,
-          isbn: '000',
-          description: '',
-          rating: 0
-        }))
-      )
-      .subscribe(book => this.book = book);
+        switchMap(isbn =>
+          this.bs.getSingle(isbn).pipe(
+            catchError((e: HttpErrorResponse) => of({
+              title: 'Error loading ' + e.url,
+              isbn: '000',
+              description: '',
+              rating: 0
+            }))
+          )
+        )
+      );
   }
-
 }

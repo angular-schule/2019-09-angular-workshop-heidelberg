@@ -1,4 +1,18 @@
-<h1>{{ book?.title }}</h1>
+<ng-container *ngIf="book$ | async as book; else loading">
+
+  <h1>{{ book.title }}</h1>
+
+  <p>
+    {{ book.description }}
+  </p>
+
+</ng-container>
+
+<ng-template #loading>
+
+  <h2>Lade Buch...</h2>
+
+</ng-template>
 
 <a routerLink="/book/123456789">Go to fake book</a><br>
 <a routerLink="/book/9783864902079">Go to book 9783864902079</a>
