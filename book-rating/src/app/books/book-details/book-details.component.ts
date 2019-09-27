@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { of, from, timer, interval } from 'rxjs';
 
 @Component({
   selector: 'br-book-details',
@@ -13,9 +15,29 @@ export class BookDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.isbn = this.route.snapshot.paramMap.get('isbn');
+    // #region
+    // only for simple cases
+    // this.isbn = this.route.snapshot.paramMap.get('isbn');
 
-    // this.route.paramMap
+    this.route.paramMap
+      .pipe(
+        map(paramMap => paramMap.get('isbn'))
+      )
+      .subscribe(isbn => this.isbn = isbn);
+      // #endregion
+
+
+    /// --- PLAYGROUND ----
+    // import { of, from, timer, interval } from 'rxjs';
+    of('😀', '😎', '😇', '😱')
+        .subscribe(
+          s => console.log(s),
+          e => console.error(e),
+          () => console.log('COMPLETE')
+        );
+
+
+
   }
 
 }
