@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, filter, scan, reduce, tap } from 'rxjs/operators';
+import { map, filter, scan, reduce, tap, mergeMap, concatMap, switchMap, catchError } from 'rxjs/operators';
 import { of, from, timer, interval, Subscription, Observable } from 'rxjs';
 import { BookStoreService } from '../shared/book-store.service';
 import { Book } from '../shared/book';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'br-book-details',
@@ -22,10 +23,15 @@ export class BookDetailsComponent implements OnInit {
     this.route.paramMap
       .pipe(
         map(paramMap => paramMap.get('isbn')),
-        map(isbn => this.bs.getSingle(isbn)),
+        switchMap(isbn => this.bs.getSingle(isbn)),
+        catchError((e: HttpErrorResponse) => of({
+          title: 'Error loading ' + e.url,
+          isbn: '000',
+          description: '',
+          rating: 0
+        }))
       )
-      .subscribe(book$ => book$
-          .subscribe(book => this.book = book));
+      .subscribe(book => this.book = book);
   }
 
 }
