@@ -28,13 +28,15 @@ export class BookDetailsComponent implements OnInit {
 
 
     /// --- PLAYGROUND ----
-    // import { of, from, timer, interval } from 'rxjs';
+
+    const observer = {
+      next: s => console.log(s),
+      error: e => console.error(e),
+      complete: () => console.log('COMPLETE')
+    };
+
     of('😀', '😎', '😇', '😱')
-        .subscribe(
-          s => console.log(s),
-          e => console.error(e),
-          () => console.log('COMPLETE')
-        );
+        .subscribe(observer);
 
 
 
