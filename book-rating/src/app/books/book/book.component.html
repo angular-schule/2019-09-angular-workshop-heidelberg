@@ -5,7 +5,11 @@
     <div class="card-title">
       <h2>
         {{ book.title }}
-        <span class="badge badge-secondary">{{ book.rating }}</span>
+        <span class="badge badge-secondary">
+          <ng-container *ngFor="let s of stars">
+            ⭐
+          ️</ng-container>
+        </span>
       </h2>
     </div>
     <p>{{ book.description }}</p>
@@ -16,7 +20,11 @@
 
     <button
       (click)="doRateUp()"
-      class="btn btn-primary"> + </button>
+      class="btn btn-primary mr-2"> + </button>
+
+    <a
+      [routerLink]="['/book', book.isbn]"
+      class="btn btn-primary">Details</a>
 
   </div>
 </div>
