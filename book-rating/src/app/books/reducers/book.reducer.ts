@@ -17,27 +17,19 @@ export const initialState: State = {
 const bookReducer = createReducer(
   initialState,
 
-  on(BookActions.loadBooks, state => {
-    return {
-      ...state,
-      loading: true
-    };
-  }),
-  on(BookActions.loadBooksSuccess, (state, action) => {
-    return {
-      ...state,
-      books: action.data,
-      loading: false
-    };
-  }),
-  on(BookActions.loadBooksFailure, (state, action) => {
-    return {
-      ...state,
-      books: [],
-      loading: false
-    };
-  }),
+  on(BookActions.loadBooks, state => ({ ...state, loading: true })),
 
+  on(BookActions.loadBooksSuccess, (state, action) => ({
+    ...state,
+    books: action.data,
+    loading: false
+  })),
+
+  on(BookActions.loadBooksFailure, (state, action) => ({
+    ...state,
+    books: [],
+    loading: false
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {
