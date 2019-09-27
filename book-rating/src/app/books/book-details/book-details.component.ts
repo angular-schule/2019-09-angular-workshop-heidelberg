@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { of, from, timer, interval, Subscription } from 'rxjs';
+import { of, from, timer, interval, Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'br-book-details',
@@ -36,7 +36,20 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       complete: () => console.log('COMPLETE')
     };
 
-    this.subscription = of('😀', '😎', '😇', '😱')
+    const observable = new Observable(subscriber => {
+      subscriber.next('😀');
+      subscriber.next('😍');
+      subscriber.next('😆');
+
+      setTimeout(() => subscriber.next('😎'), 1000);
+      setTimeout(() => subscriber.next('🤓'), 2000);
+
+      setTimeout(() => subscriber.error('😡'), 1000);
+
+
+    });
+
+    this.subscription = observable
         .subscribe(observer);
   }
 
