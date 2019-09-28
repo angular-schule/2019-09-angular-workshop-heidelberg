@@ -1,20 +1,20 @@
 import { Component, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Book } from '../shared/book';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { State } from 'src/app/reducers';
 import { loadBooks } from '../actions/book.actions';
+import { getBooksLoading, getAllBooks } from '../selectors/book.selectors';
 
 @Component({
   selector: 'br-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-
-  // ACHTUNG: ergibt einen Bug, sobald wir Ajax einführen!
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
-  books: Book[] = [];
+  loading$ = this.store.pipe(select(getBooksLoading));
+  books$ = this.store.pipe(select(getAllBooks));
 
   constructor(private store: Store<State>) {
 
